@@ -54,7 +54,7 @@ Tests are located in the `test` folder located at the root of the main applicati
 ### Milestone 3 - Implement GET, DELETE, POST, and PUT
 - GET and DELETE are pretty similar, so should start with those two
 - Likewise, POST and PUT are similar and can be done in the same milestone
-- Our server should conform the the REST API
+- Our server should conform to the REST API
 ### Milestone 4 - Asynchronous
 - Allow multiple asynchronous requests to occur
 
