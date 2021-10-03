@@ -41,20 +41,22 @@ Tests are located in the `test` folder located at the root of the main applicati
 **Mocha**: This is our test framework that we’ll be using for our project. Mocha is probably the most popular testing framework for node so there is ample amount of documentation and support. We decided to use Mocha for that reason. 
 
 ## Roadmap
-### Milestone 1 - Setting up the tech stack and relevant documentation
+### Milestone 1 - Setting up the tech stack and create a TCP server on a socket connection
 - Set up local developer environment
 - Create Git repo
 - Figure out what libraries we might use
 - Containerize our application, probably via Docker
+- Need to create a server that’s capable of listening in on a socket connection
+- Might need to read RFC? https://www.rfc-editor.org/info/rfc7235
 ### Milestone 2 - Create a TCP server on a socket connection
 - Need to create a server that’s capable of listening in on a socket connection
-- Will probably use Socket.IO
 - Might need to read RFC? https://www.rfc-editor.org/info/rfc7235
-### Milestone 3 - Implement GET and DELETE
+### Milestone 3 - Implement GET, DELETE, POST, and PUT
 - GET and DELETE are pretty similar, so should start with those two
-- Our server should conform the the REST API
-### Milestone 4 - Implement POST and PUT
 - Likewise, POST and PUT are similar and can be done in the same milestone
+- Our server should conform the the REST API
+### Milestone 4 - Asynchronous
+- Allow multiple asynchronous requests to occur
 
 
 
