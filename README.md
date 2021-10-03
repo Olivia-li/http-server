@@ -14,3 +14,8 @@ Build the docker image:
 
 To run the program:
 `docker run http-server`
+
+### Tests
+Tests are located in the `test` folder located at the root of the main application. To run all tests in the test folder run:
+`yarn run test`
+
