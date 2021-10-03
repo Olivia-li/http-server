@@ -12,5 +12,5 @@ Follow the installation instructions [here](https://docs.docker.com/get-docker/)
 Build the docker image (requires a Docker account for a Docker ID):
 `docker build -t http-server .`
 
-To run the program on port 8080:
+To run the program:
 `docker run http-server`
