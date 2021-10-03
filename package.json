@@ -4,7 +4,8 @@
   "description": "A JavaScript HTTP server",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "preinstall": "npx only-allow yarn"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,5 @@
   "bugs": {
     "url": "https://github.com/Olivia-li/http-server/issues"
   },
-  "homepage": "https://github.com/Olivia-li/http-server#readme",
-  "dependencies": {
-    "postman": "^0.2.0"
-  }
+  "homepage": "https://github.com/Olivia-li/http-server#readme"
 }
