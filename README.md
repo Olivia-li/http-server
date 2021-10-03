@@ -9,8 +9,13 @@ Make sure all system requirements shown in the link below are completed before i
 Follow the installation instructions [here](https://docs.docker.com/get-docker/).
 
 ### Running the app with Docker
-Build the docker image (requires a Docker account for a Docker ID):
+Build the docker image:
 `docker build -t http-server .`
 
 To run the program:
 `docker run http-server`
+
+### Tests
+Tests are located in the `test` folder located at the root of the main application. To run all tests in the test folder run:
+`yarn run test`
+
