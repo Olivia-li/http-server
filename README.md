@@ -10,10 +10,7 @@ Follow the installation instructions [here](https://docs.docker.com/get-docker/)
 
 ### Running the app with Docker
 Build the docker image (requires a Docker account for a Docker ID):
-`docker build -t <Docker ID>/http-server .`
-
-Find the resulting image ID:
-`docker images`
+`docker build -t http-server .`
 
 To run the program on port 8080:
-`docker run -p 8080:8080 <image ID>`
+`docker run http-server`
