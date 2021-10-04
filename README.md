@@ -20,42 +20,49 @@ Tests are located in the `test` folder located at the root of the main applicati
 `yarn run test`
 
 ## Tech stack and toolchain
-**Git/Github**: The entire team knows Git and it’s also the industry standard so new developers would be able to join without learning a new versioning control system. Github provides more features for free than Gitlab which is why we decided on Github. We’re going to be using Github Projects and Github Issues as well. 
+**Git/GitHub**: <br>
+The entire team knows Git and it’s also the industry standard so new developers would be able to join without learning a new versioning control system. Github provides more features for free than Gitlab which is why we decided on Github. We’re going to be using Github Projects and Github Issues as well. 
 <br>
 <br>
-**Yarn**: Npm and yarn are pretty comparable but yarn has slightly better caching abilities. If we were to expand this project to include many other packages this would be better for performance. 
+**Yarn**: <br>
+Npm and yarn are pretty comparable but yarn has slightly better caching abilities. If we were to expand this project to include many other packages this would be better for performance. 
 <br>
 <br>
-**Node**: The team is aware of Deno and that there are numerous features that make it faster and safer than Node. However, it was just recently that Deno came out with this version 1.0 and there is still limited support on it compared to Node. We decided to use Node instead because it currently is much more mature and has a much bigger community behind it. 
+**Node**: <br>
+The team is aware of Deno and that there are numerous features that make it faster and safer than Node. However, it was just recently that Deno came out with this version 1.0 and there is still limited support on it compared to Node. We decided to use Node instead because it currently is much more mature and has a much bigger community behind it. 
 <br>
 <br>
-**Docker**: We wanted to use a containerizer that the majority of our team has worked with. We didn’t want to be bogged down with this part of the project and wanted to focus more of our time into actually building out the http server. 
+**Docker**: <br>
+We wanted to use a containerizer that the majority of our team has worked with. We didn’t want to be bogged down with this part of the project and wanted to focus more of our time into actually building out the http server. 
 <br>
 <br>
-**Postman/Curl/Firefox Developer Edition**: We all have our own ways of creating and sending http requests. Unifying which API tester we use isn’t particularly important. Each team member will be using the API tester they are most familiar with. 
+**Postman/Curl/Firefox Developer Edition**: <br>
+We all have our own ways of creating and sending http requests. Unifying which API tester we use isn’t particularly important. Each team member will be using the API tester they are most familiar with. 
 <br>
 <br>
-**Notion**: We’ve decided to use Notion to store our meeting notes and other important information like assignment deadlines and important links. We decided on Notion because it gives us the most flexibility in what we need—whether that be kanban boards or a calendar. It also allows us to integrate Google Docs and other documents. 
+**Notion**: <br>
+We’ve decided to use Notion to store our meeting notes and other important information like assignment deadlines and important links. We decided on Notion because it gives us the most flexibility in what we need—whether that be kanban boards or a calendar. It also allows us to integrate Google Docs and other documents. 
 <br>
 <br>
-**Mocha**: This is our test framework that we’ll be using for our project. Mocha is probably the most popular testing framework for node so there is ample amount of documentation and support. We decided to use Mocha for that reason. 
+**Mocha**: <br>
+This is our test framework that we’ll be using for our project. Mocha is probably the most popular testing framework for node so there is ample amount of documentation and support. We decided to use Mocha for that reason. 
 
 ## Roadmap
-### Milestone 1 - Setting up the tech stack and create a TCP server on a socket connection
+### Milestone 1: Setting up the tech stack and create a TCP server on a socket connection
 - Set up local developer environment
 - Create Git repo
 - Figure out what libraries we might use
 - Containerize our application, probably via Docker
 - Need to create a server that’s capable of listening in on a socket connection
 - Might need to read RFC? https://www.rfc-editor.org/info/rfc7235
-### Milestone 2 - Create a TCP server on a socket connection
+### Milestone 2: Create a TCP server on a socket connection
 - Need to create a server that’s capable of listening in on a socket connection
 - Might need to read RFC? https://www.rfc-editor.org/info/rfc7235
-### Milestone 3 - Implement GET, DELETE, POST, and PUT
+### Milestone 3: Implement GET, DELETE, POST, and PUT
 - GET and DELETE are pretty similar, so should start with those two
 - Likewise, POST and PUT are similar and can be done in the same milestone
 - Our server should conform to the REST API
-### Milestone 4 - Asynchronous
+### Milestone 4: Asynchronous
 - Allow multiple asynchronous requests to occur
 
 
