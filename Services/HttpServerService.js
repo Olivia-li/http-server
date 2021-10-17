@@ -15,12 +15,11 @@ server.listen(port, () => {
 
 function readHttpRequestMessage(socketConnection, message) {
     message = message.split(/\n\n(.+)/);
-    if (message.length != 2) {
+    if (message.length > 2 || message.length < 1) {
         throw new BadRequestError("Malformed HTTP Request");
     }
     const requestInfo = message[0].split("\n");
-    // TODO: bug if no body fix this
-    const body = message[1];
+    const body = message.length === 2 ? message[1] : '';
 
     const startLine = requestInfo[0].split(" ");
     if (startLine.length !== 3) {
@@ -33,7 +32,7 @@ function readHttpRequestMessage(socketConnection, message) {
     var headers = {};
     for (let i = 1; i < requestInfo.length; i++) {
         var header = requestInfo[i].split(":");
-        headers[header[0]] = header[1].trim(); //TODO: check if trim returns string, or if it mutates variable containing string
+        headers[header[0]] = header[1].trim();
     }
 
     const httpMessage = new HttpMessage(httpMethod, requestTarget, httpVersion, headers, body);
