@@ -1,14 +1,11 @@
 import {HttpMessage} from "../Models/HttpMessage";
+import {httpDelete, httpGet, httpPost, httpPut} from "../Controller/HttpServerController";
 
 var net = require("net");
 var port = 8080;
 
 var server = net.createServer((socketConnection) => {
     socketConnection.setEncoding('ascii');
-    socketConnection.on("end", () => {
-        console.log("Client disconnected, shutting down server");
-        server.close();
-    });
     socketConnection.on("data", (message) => readHttpRequestMessage(socketConnection, message.toString("ascii")));
 });
 
@@ -18,11 +15,11 @@ server.listen(port, () => {
 
 function readHttpRequestMessage(socketConnection, message) {
     message = message.split(/\n\n(.+)/);
-    if (message.length > 2 || message.length < 1) {
-        //TODO return error code 400 Bad Request
+    if (message.length != 2) {
         throw new BadRequestError("Malformed HTTP Request");
     }
     const requestInfo = message[0].split("\n");
+    // TODO: bug if no body fix this
     const body = message[1];
 
     const startLine = requestInfo[0].split(" ");

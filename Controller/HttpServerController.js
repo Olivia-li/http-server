@@ -1,15 +1,19 @@
-function httpGet(httpMessage) {
+import {parseBody} from "./HttpBodyParserController";
+
+export function httpGet(httpMessage) {
     return null;
 }
 
-function httpPost(httpMessage) {
+export function httpPost(httpMessage) {
+    const parsedBody = parseBody(httpMessage);
     return null;
 }
 
-function httpDelete(httpMessage) {
+export function httpDelete(httpMessage) {
     return null;
 }
 
-function httpPut(httpMessage) {
+export function httpPut(httpMessage) {
+    const parsedBody = parseBody(httpMessage);
     return null;
 }
