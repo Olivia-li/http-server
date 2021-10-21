@@ -1,5 +1,6 @@
-import {parseBody} from "./HttpBodyParserController";
-import {HttpMessage} from "../Models/HttpMessage"
+import { parseBody } from "./HttpBodyParserController";
+import { HttpMessage } from "../Models/HttpMessage"
+import { URLparse, URLpath } from "../Services/URLParserService";
 
 /**
  * GET
@@ -8,7 +9,8 @@ import {HttpMessage} from "../Models/HttpMessage"
  * @returns 
  */
 export function httpGet(httpMessage) {
-    const target = httpMessage.requestTarget;
+    const url = URLparse(httpMessage.requestTarget);
+    const path = URLpath(url);
     // retrieve target from server
 
     // on bad request, return 4XX error
@@ -38,7 +40,8 @@ export function httpPost(httpMessage) {
  * @returns 
  */
 export function httpDelete(httpMessage) {
-    const target = httpMessage.requestTarget;
+    const url = URLparse(httpMessage.requestTarget);
+    const path = URLpath(url);
     // remove target from server
 
     // on bad request, return 4XX error
