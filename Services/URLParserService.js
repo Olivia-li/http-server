@@ -5,7 +5,7 @@
  */
 export function URLparse(target) {
     try {
-        return url = new URL(target);
+        return new URL(target);
     } catch {
         console.error("Invalid URL.");
     }
@@ -14,8 +14,17 @@ export function URLparse(target) {
 /**
  * Get path of url.
  * @param {URL} target 
- * @returns 
+ * @returns {String[]}
  */
 export function URLpath(target) {
     return target.pathname.split('/');
+}
+
+/**
+ * Get URLSearchParams object for working with query strings.
+ * @param {URL} target 
+ * @returns {URLSearchParams} https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+ */
+export function URLparams(target) {
+    return target.searchParams;
 }
