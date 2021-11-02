@@ -1,5 +1,5 @@
 const assert = require('assert');
-const HttpMessage = require("../Models/HttpMessage");
+const {HttpMessage} = require("../Models/HttpMessage");
 const {httpGet} = require("../Controller/HttpServerController.js");
 
 describe('Simple Math Test', () => {
@@ -18,4 +18,3 @@ describe('Simple Math Test', () => {
         });
     });
  });
- 
