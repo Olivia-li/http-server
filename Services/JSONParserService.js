@@ -5,3 +5,5 @@ function jsonParser(body) {
         console.error("Improper Format");
     }
 }
+
+module.exports = {jsonParser};

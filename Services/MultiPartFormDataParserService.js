@@ -13,3 +13,5 @@ function multiPartFormParser(body) {
         return {fields: fields, files: files}
     });
 }
+
+module.exports = {multiPartFormParser};

@@ -5,7 +5,7 @@
  */
 function URLParse(target) {
     try {
-        return url = new URL(target);
+        return new URL(target);
     } catch {
         console.error("Invalid URL.");
     }
@@ -19,3 +19,5 @@ function URLParse(target) {
 function URLPath(target) {
     return target.pathname.split('/');
 }
+
+module.exports = {URLParse, URLPath};

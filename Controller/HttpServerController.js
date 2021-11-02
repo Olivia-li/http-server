@@ -63,3 +63,5 @@ function httpPut(httpMessage) {
     const parsedBody = parseBody(httpMessage);
     return "HTTP/1.1 200 OK";
 }
+
+module.exports = {httpGet, httpPost, httpDelete, httpPut};

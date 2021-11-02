@@ -17,3 +17,5 @@ class HttpMessage {
     }
 
 }
+
+module.exports = {HttpMessage};
