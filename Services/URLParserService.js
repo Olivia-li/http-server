@@ -3,7 +3,7 @@
  * @param {String} target
  * @returns {URL} https://developer.mozilla.org/en-US/docs/Web/API/URL
  */
-export function URLparse(target) {
+function URLParse(target) {
     try {
         return url = new URL(target);
     } catch {
@@ -16,6 +16,6 @@ export function URLparse(target) {
  * @param {URL} target 
  * @returns 
  */
-export function URLpath(target) {
+function URLPath(target) {
     return target.pathname.split('/');
 }

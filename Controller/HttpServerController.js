@@ -1,6 +1,6 @@
-import { parseBody } from "./HttpBodyParserController";
-import { HttpMessage } from "../Models/HttpMessage"
-import { URLparse, URLpath } from "../Services/URLParserService";
+const {parseBody} = require( "./HttpBodyParserController");
+const {HttpMessage} = require( "../Models/HttpMessage");
+const {URLParse, URLPath} = require( "../Services/URLParserService");
 
 /**
  * GET
@@ -8,9 +8,9 @@ import { URLparse, URLpath } from "../Services/URLParserService";
  * @param {HttpMessage} httpMessage 
  * @returns 
  */
-export function httpGet(httpMessage) {
-    const url = URLparse(httpMessage.requestTarget);
-    const path = URLpath(url);
+function httpGet(httpMessage) {
+    const url = URLParse(httpMessage.requestTarget);
+    const path = URLPath(url);
     // retrieve target from server
 
     // on bad request, return 4XX error
@@ -19,7 +19,7 @@ export function httpGet(httpMessage) {
 
     // on success, return 200 Ok with resource in body
 
-    return null;
+    return "HTTP/1.1 200 OK";
 }
 
 /**
@@ -28,9 +28,9 @@ export function httpGet(httpMessage) {
  * @param {HttpMessage} httpMessage 
  * @returns 
  */
-export function httpPost(httpMessage) {
+function httpPost(httpMessage) {
     const parsedBody = parseBody(httpMessage);
-    return null;
+    return "HTTP/1.1 200 OK";
 }
 
 /**
@@ -39,9 +39,9 @@ export function httpPost(httpMessage) {
  * @param {HttpMessage} httpMessage 
  * @returns 
  */
-export function httpDelete(httpMessage) {
-    const url = URLparse(httpMessage.requestTarget);
-    const path = URLpath(url);
+function httpDelete(httpMessage) {
+    const url = URLParse(httpMessage.requestTarget);
+    const path = URLPath(url);
     // remove target from server
 
     // on bad request, return 4XX error
@@ -50,7 +50,7 @@ export function httpDelete(httpMessage) {
 
     // on success, return 200 Ok with resource in body
 
-    return null;
+    return "HTTP/1.1 200 OK";
 }
 
 /**
@@ -59,7 +59,7 @@ export function httpDelete(httpMessage) {
  * @param {HttpMessage} httpMessage 
  * @returns 
  */
-export function httpPut(httpMessage) {
+function httpPut(httpMessage) {
     const parsedBody = parseBody(httpMessage);
-    return null;
+    return "HTTP/1.1 200 OK";
 }

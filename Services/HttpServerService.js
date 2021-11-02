@@ -1,10 +1,9 @@
-import {HttpMessage} from "../Models/HttpMessage";
-import {httpDelete, httpGet, httpPost, httpPut} from "../Controller/HttpServerController";
+const net = require("net");
+const {HttpMessage} = require("../Models/HttpMessage");
+const {httpGet, httpPost, httpPut, httpDelete} = require("../Controller/HttpServerController");
 
-var net = require("net");
-var port = 8080;
-
-var server = net.createServer((socketConnection) => {
+const port = 8080;
+const server = net.createServer((socketConnection) => {
     socketConnection.setEncoding('ascii');
     socketConnection.on("data", (message) => readHttpRequestMessage(socketConnection, message.toString("ascii")));
 });
@@ -39,20 +38,16 @@ function readHttpRequestMessage(socketConnection, message) {
 
     switch (httpMethod) {
         case "GET":
-            httpGet(httpMessage);
-            break;
+            return httpGet(httpMessage);
 
         case "POST":
-            httpPost(httpMessage);
-            break;
+            return httpPost(httpMessage);
 
         case "DELETE":
-            httpDelete(httpMessage);
-            break;
+            return httpDelete(httpMessage);
 
         case "PUT":
-            httpPut(httpMessage);
-            break;
+            return httpPut(httpMessage);
 
         default:
             throw new UnsupportedMethodError("HTTP Method not allowed");

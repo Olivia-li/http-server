@@ -1,6 +1,6 @@
 const formidable = require("formidable");
 
-export function multiPartFormParser(body) {
+function multiPartFormParser(body) {
     // Formidable requires the entire request to parse multipart form data.
     // TODO: Will need to figure out the structure of a request object.
 
