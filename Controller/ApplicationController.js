@@ -1,4 +1,4 @@
-import { httpGet, httpPost, httpDelete, httpPut } from "./HttpServerController.js";
+let { httpGet, httpPost, httpDelete, httpPut } = require("./HttpServerController.js")
 
 function getResponse(request) {
   switch (request.method) {
@@ -16,3 +16,5 @@ function getResponse(request) {
       break;
   }
 }
+
+module.exports = { getResponse };

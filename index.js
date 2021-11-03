@@ -1,11 +1,15 @@
-var net = require("net");
-var port = 8080;
+const net = require("net");
+const port = 8080;
+const {getResponse} = require("./Controller/ApplicationController.js")
 
-var server = net.createServer((socketConnection) => {
+let server = net.createServer((socketConnection) => {
     socketConnection.write("Hello World! Echo server connected to a client\r\n");
+
     socketConnection.on('data',data=>{
         const [firstLine, ...otherLines] = data.toString().split('\n');
-        const [method, path, httpVersion] = firstLine.trim().split(' ');
+        const [method, pathParams, httpVersion] = firstLine.trim().split(' ');
+        path = pathParams.split('?')[0];
+        const params = JSON.parse('{"' + decodeURI(pathParams.split('?')[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
         const headers = Object.fromEntries(otherLines.filter(_=>_)
             .map(line=>line.split(':').map(part=>part.trim()))
             .map(([name, ...rest]) => [name, rest.join(' ')]));
@@ -16,10 +20,12 @@ var server = net.createServer((socketConnection) => {
         const request = {
             method,
             path,
+            params,
             httpVersion,
             headers,
             body
         }
+        // getResponse(request)
         console.log(request);
     })
     socketConnection.on("end", () => {
