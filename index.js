@@ -9,12 +9,18 @@ var server = net.createServer((socketConnection) => {
         const headers = Object.fromEntries(otherLines.filter(_=>_)
             .map(line=>line.split(':').map(part=>part.trim()))
             .map(([name, ...rest]) => [name, rest.join(' ')]));
+        let body;
+            try {
+                body = JSON.parse(bodyContent);
+            } catch(err){/* ignore */}
         const request = {
             method,
             path,
             httpVersion,
             headers,
+            body
         }
+        console.log(request);
     })
     socketConnection.on("end", () => {
         console.log("Client disconnected, shutting down server");
