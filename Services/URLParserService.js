@@ -3,7 +3,7 @@
  * @param {String} target
  * @returns {URL} https://developer.mozilla.org/en-US/docs/Web/API/URL
  */
-export function URLparse(target) {
+function URLParse(target) {
     try {
         return new URL(target);
     } catch {
@@ -16,7 +16,7 @@ export function URLparse(target) {
  * @param {URL} target 
  * @returns {String[]}
  */
-export function URLpath(target) {
+function URLPath(target) {
     return target.pathname.split('/');
 }
 
@@ -25,6 +25,7 @@ export function URLpath(target) {
  * @param {URL} target 
  * @returns {URLSearchParams} https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
  */
-export function URLparams(target) {
+function URLparams(target) {
     return target.searchParams;
 }
+module.exports = {URLParse, URLPath, URLparams};

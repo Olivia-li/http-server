@@ -1,3 +1,5 @@
-export function plainTextParser(body) {
+function plainTextParser(body) {
     return body;
 }
+
+module.exports = {plainTextParser};

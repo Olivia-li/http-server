@@ -3,6 +3,19 @@ var port = 8080;
 
 var server = net.createServer((socketConnection) => {
     socketConnection.write("Hello World! Echo server connected to a client\r\n");
+    socketConnection.on('data',data=>{
+        const [firstLine, ...otherLines] = data.toString().split('\n');
+        const [method, path, httpVersion] = firstLine.trim().split(' ');
+        const headers = Object.fromEntries(otherLines.filter(_=>_)
+            .map(line=>line.split(':').map(part=>part.trim()))
+            .map(([name, ...rest]) => [name, rest.join(' ')]));
+        const request = {
+            method,
+            path,
+            httpVersion,
+            headers,
+        }
+    })
     socketConnection.on("end", () => {
         console.log("Client disconnected, shutting down server");
         server.close();

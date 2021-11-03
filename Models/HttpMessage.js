@@ -1,5 +1,5 @@
 /** Model for parsing HTTP requests */
-export class HttpMessage {
+class HttpMessage {
     /**
      * Define the parts of the HTTP request.
      * @param {String} httpMethod 
@@ -17,3 +17,5 @@ export class HttpMessage {
     }
 
 }
+
+module.exports = {HttpMessage};

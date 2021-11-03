@@ -1,12 +1,11 @@
-import {multiPartFormParser} from "../Services/MultiPartFormDataParserService";
-import {jsonParser} from "../Services/JSONParserService";
-import {plainTextParser} from "../Services/PlainTextParserService";
-import {CONTENT_TYPE_HEADER} from "../Constants/HttpHeaders";
+const {multiPartFormParser} = require("../Services/MultiPartFormDataParserService");
+const {jsonParser} = require("../Services/JSONParserService");
+const {plainTextParser} = require("../Services/PlainTextParserService");
+const {CONTENT_TYPE_HEADER} = require("../Constants/HttpHeaders");
 
 const SUPPORTED_CONTENT_TYPES = ["application/json", "text/plain", "multipart/form-data"];
 
-
-export function parseBody(httpRequest) {
+function parseBody(httpRequest) {
     if (!(CONTENT_TYPE_HEADER in httpRequest.headers)) {
         throw new UnsupportedContentTypeError("Missing Content-Type Header");
     }
@@ -24,3 +23,5 @@ export function parseBody(httpRequest) {
             return multiPartFormParser(httpRequest.body);
     }
 }
+
+module.exports = {parseBody};
