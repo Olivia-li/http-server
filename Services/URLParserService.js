@@ -14,10 +14,18 @@ function URLParse(target) {
 /**
  * Get path of url.
  * @param {URL} target 
- * @returns 
+ * @returns {String[]}
  */
 function URLPath(target) {
     return target.pathname.split('/');
 }
 
-module.exports = {URLParse, URLPath};
+/**
+ * Get URLSearchParams object for working with query strings.
+ * @param {URL} target 
+ * @returns {URLSearchParams} https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+ */
+function URLparams(target) {
+    return target.searchParams;
+}
+module.exports = {URLParse, URLPath, URLparams};
