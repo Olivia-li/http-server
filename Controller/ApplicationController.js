@@ -3,17 +3,14 @@ let { httpGet, httpPost, httpDelete, httpPut } = require("./HttpServerController
 function getResponse(request) {
   switch (request.method) {
     case "GET":
-      httpGet(request);
-      break;
+      return httpGet(request);
     case "POST":
-      httpPost(request);
+      return httpPost(request);
       break;
     case "DELETE":
-      httpDelete(request);
-      break;
+      return httpDelete(request);
     case "PUT":
-      httpPut(request);
-      break;
+      return httpPut(request);
   }
 }
 

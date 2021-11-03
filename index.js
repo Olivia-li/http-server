@@ -25,7 +25,9 @@ let server = net.createServer((socketConnection) => {
             headers,
             body
         }
-        // getResponse(request)
+        let response = getResponse(request)
+        socketConnection.write(`${String(response)}`);
+        console.log(response)
         console.log(request);
     })
     socketConnection.on("end", () => {

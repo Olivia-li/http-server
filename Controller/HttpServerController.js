@@ -1,6 +1,7 @@
 const {parseBody} = require( "./HttpBodyParserController");
 const {HttpMessage} = require( "../Models/HttpMessage");
 const {URLParse, URLPath} = require( "../Services/URLParserService");
+const {Assignment2} = require("./TestController")
 
 /**
  * GET
@@ -9,17 +10,14 @@ const {URLParse, URLPath} = require( "../Services/URLParserService");
  * @returns 
  */
 function httpGet(httpMessage) {
-    const url = URLParse(httpMessage.requestTarget);
-    const path = URLPath(url);
-    // retrieve target from server
+    const host = httpMessage.headers.Host
+    const path = httpMessage.path
+    const params = httpMessage.params
 
-    // on bad request, return 4XX error
+    return Assignment2(host, path, params)
 
-    // on server failure, return 5XX error
 
-    // on success, return 200 Ok with resource in body
-
-    return "HTTP/1.1 200 OK";
+    // return "HTTP/1.1 200 OK";
 }
 
 /**
