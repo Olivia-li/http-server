@@ -6,7 +6,6 @@ function getResponse(request) {
       return httpGet(request);
     case "POST":
       return httpPost(request);
-      break;
     case "DELETE":
       return httpDelete(request);
     case "PUT":

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Olivia-li/http-server#readme",
   "dependencies": {
     "formidable": "^1.2.2",
-    "mocha": "^9.1.2"
+    "mocha": "^9.1.2",
+    "string.prototype.replaceall": "^1.0.6"
   }
 }

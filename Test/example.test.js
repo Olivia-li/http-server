@@ -1,20 +1,20 @@
 const assert = require('assert');
-const {HttpMessage} = require("../Models/HttpMessage");
+const {HttpRequestMessage} = require("../Models/HttpRequestMessage");
 const {httpGet} = require("../Controller/HttpServerController.js");
 
 describe('Simple Math Test', () => {
   it('should return 2', () => {
-         assert.equal(1 + 1, 2);
+         assert.strictEqual(1 + 1, 2);
      });
   it('should return 9', () => {
-         assert.equal(3 * 3, 9);
+         assert.strictEqual(3 * 3, 9);
      });
  });
 
  describe('Simple http tests', () => {
     describe('GET', () => {
         it('should return HTTP/1.1 200 OK', () => {
-        assert.equal("HTTP/1.1 200 OK", httpGet(new HttpMessage('','http://test.com','',{},'')));
+        assert.strictEqual("HTTP/1.1 200 OK", httpGet(new HttpRequestMessage('','http://test.com','',{},'')));
         });
     });
  });

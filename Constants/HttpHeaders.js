@@ -1,1 +1,5 @@
 const CONTENT_TYPE_HEADER = "Content-Type";
+const CONTENT_LENGTH_HEADER = "Content-Length";
+const CONNECTION_HEADER = "Connection";
+
+module.exports = {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER};

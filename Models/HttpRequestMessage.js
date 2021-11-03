@@ -1,18 +1,16 @@
 /** Model for parsing HTTP requests */
-class HttpMessage {
+class HttpRequestMessage {
     /**
      * Define the parts of the HTTP request.
      * @param {String} method 
-     * @param {String} path 
-     * @param {String} params 
+     * @param {String} requestTarget
      * @param {String} httpVersion 
-     * @param {*[]} headers 
-     * @param {*} body 
+     * @param {{}} headers
+     * @param {String} body
      */
-    constructor(method, path, params, httpVersion, headers, body) {
+    constructor(method, requestTarget, httpVersion, headers, body) {
         this.method = method;
-        this.path = path;
-        this.params = params;
+        this.requestTarget = requestTarget;
         this.httpVersion = httpVersion;
         this.headers = headers;
         this.body = body;
@@ -20,4 +18,4 @@ class HttpMessage {
 
 }
 
-module.exports = {HttpMessage};
+module.exports = {HttpRequestMessage};

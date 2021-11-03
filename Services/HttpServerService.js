@@ -1,18 +1,21 @@
 const net = require("net");
-const {HttpMessage} = require("../Models/HttpMessage");
+const {HttpRequestMessage} = require("../Models/HttpRequestMessage");
 const {httpGet, httpPost, httpPut, httpDelete} = require("../Controller/HttpServerController");
+const replaceAll = require('string.prototype.replaceall');
 
 const port = 8080;
 const server = net.createServer((socketConnection) => {
     socketConnection.setEncoding('ascii');
-    socketConnection.on("data", (message) => readHttpRequestMessage(socketConnection, message.toString("ascii")));
+    socketConnection.on("data", (message) => readHttpRequestMessage(server, socketConnection, message.toString("ascii")));
 });
 
 server.listen(port, () => {
     console.log("server listening on port " + port);
 });
 
-function readHttpRequestMessage(socketConnection, message) {
+function readHttpRequestMessage(server, socketConnection, message) {
+
+    message = replaceAll(message, '\r', '');
     message = message.split(/\n\n(.+)/);
     if (message.length > 2 || message.length < 1) {
         throw new BadRequestError("Malformed HTTP Request");
@@ -30,15 +33,19 @@ function readHttpRequestMessage(socketConnection, message) {
 
     var headers = {};
     for (let i = 1; i < requestInfo.length; i++) {
-        var header = requestInfo[i].split(":");
+        var header = requestInfo[i].split(/:(.+)/);
+        if (header.length < 2) {
+            continue;
+        }
         headers[header[0]] = header[1].trim();
     }
 
-    const httpMessage = new HttpMessage(httpMethod, requestTarget, httpVersion, headers, body);
+    const httpMessage = new HttpRequestMessage(httpMethod, requestTarget, httpVersion, headers, body);
 
     switch (httpMethod) {
         case "GET":
-            return httpGet(httpMessage);
+            socketConnection.write(httpGet(httpMessage));
+            break;
 
         case "POST":
             return httpPost(httpMessage);
@@ -53,3 +60,5 @@ function readHttpRequestMessage(socketConnection, message) {
             throw new UnsupportedMethodError("HTTP Method not allowed");
     }
 }
+
+module.exports = {readHttpRequestMessage};

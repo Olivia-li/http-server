@@ -1,21 +1,28 @@
 const {parseBody} = require( "./HttpBodyParserController");
-const {HttpMessage} = require( "../Models/HttpMessage");
+const {HttpRequestMessage} = require( "../Models/HttpRequestMessage");
+const {HttpResponseMessage} = require( "../Models/HttpResponseMessage");
 const {URLParse, URLPath} = require( "../Services/URLParserService");
 const {Assignment2} = require("./TestController")
+const {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER} = require("../Constants/HttpHeaders")
 
 /**
  * GET
  * Retrieve the requested resource.
- * @param {HttpMessage} httpMessage 
+ * @param {HttpRequestMessage} httpMessage
  * @returns 
  */
 function httpGet(httpMessage) {
-    const host = httpMessage.headers.Host
-    const path = httpMessage.path
-    const params = httpMessage.params
+    const body = `GET request received on path: ${httpMessage.requestTarget}`;
+    const headers = {};
+    headers[CONTENT_TYPE_HEADER] = "text/plain";
+    headers[CONTENT_LENGTH_HEADER] = `${body.length}`;
+    headers[CONNECTION_HEADER] = "close";
+    const status = "200 OK";
 
-    return Assignment2(host, path, params)
+    const httpResponse = new HttpResponseMessage(httpMessage.httpVersion, status, headers, body);
 
+
+    return httpResponse.toString();
 
     // return "HTTP/1.1 200 OK";
 }
@@ -23,7 +30,7 @@ function httpGet(httpMessage) {
 /**
  * POST
  * Add given resource to target.
- * @param {HttpMessage} httpMessage 
+ * @param {HttpRequestMessage} httpMessage
  * @returns 
  */
 function httpPost(httpMessage) {
@@ -34,7 +41,7 @@ function httpPost(httpMessage) {
 /**
  * DELETE
  * Remove requested resource.
- * @param {HttpMessage} httpMessage 
+ * @param {HttpRequestMessage} httpMessage
  * @returns 
  */
 function httpDelete(httpMessage) {
@@ -54,7 +61,7 @@ function httpDelete(httpMessage) {
 /**
  * PUT
  * Replace target resource with given resource.
- * @param {HttpMessage} httpMessage 
+ * @param {HttpRequestMessage} httpMessage
  * @returns 
  */
 function httpPut(httpMessage) {
