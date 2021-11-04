@@ -20,10 +20,7 @@ function httpGet(httpMessage) {
 
     const httpResponse = new HttpResponseMessage(httpMessage.httpVersion, status, headers, body);
 
-
     return httpResponse.toString();
-
-    // return "HTTP/1.1 200 OK";
 }
 
 /**
