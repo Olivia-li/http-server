@@ -23,3 +23,5 @@ class UnsupportedContentTypeError extends Error {
         this.errorCode = 415;
     }
 }
+
+module.exports = {BadRequestError, UnsupportedMethodError, UnsupportedContentTypeError};
