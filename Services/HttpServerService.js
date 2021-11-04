@@ -2,6 +2,7 @@ const net = require("net");
 const {HttpRequestMessage} = require("../Models/HttpRequestMessage");
 const {httpGet, httpPost, httpPut, httpDelete} = require("../Controller/HttpServerController");
 const replaceAll = require('string.prototype.replaceall');
+const {BadRequestError, UnsupportedMethodError} = require('../Models/Errors/HttpClientErrors');
 
 const port = 8080;
 const server = net.createServer((socketConnection) => {
@@ -13,7 +14,7 @@ server.listen(port, () => {
     console.log("server listening on port " + port);
 });
 
-function readHttpRequestMessage(server, socketConnection, message) {
+function readHttpRequestMessage(socketConnection, message) {
 
     message = replaceAll(message, '\r', '');
     message = message.split(/\n\n(.+)/);
