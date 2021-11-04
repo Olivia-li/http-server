@@ -17,7 +17,7 @@ server.listen(port, () => {
 function readHttpRequestMessage(socketConnection, message) {
 
     message = replaceAll(message, '\r', '');
-    message = message.split(/\n\n(.+)/);
+    message = [message.split('\n\n')[0], message.split('\n\n').splice(1).join('\n\n')];
     if (message.length > 2 || message.length < 1) {
         throw new BadRequestError("Malformed HTTP Request");
     }

@@ -36,4 +36,18 @@ describe("readHttpRequestMessage", function() {
         assert.strictEqual(readHttpRequestMessage(socketMock,'GET / HTTP/1.1\r\nContent-Type: text/plain'), undefined);
         assert.strictEqual(socketMock.written, true);
     });
+
+    it('should write to socket and return nothing on success for multiple headers', function () {
+        const socketMock = new SocketMock();
+        assert.strictEqual(socketMock.written, false);
+        assert.strictEqual(readHttpRequestMessage(socketMock,'GET / HTTP/1.1\nContent-Type: text/plain\nContent-Length: 5'), undefined);
+        assert.strictEqual(socketMock.written, true);
+    });
+
+    it('should write to socket and return nothing on success for headers and body', function () {
+        const socketMock = new SocketMock();
+        assert.strictEqual(socketMock.written, false);
+        assert.strictEqual(readHttpRequestMessage(socketMock,'GET / HTTP/1.1\nContent-Type: text/plain\nContent-Length: 5\n\nhello\n'), undefined);
+        assert.strictEqual(socketMock.written, true);
+    });
 });
