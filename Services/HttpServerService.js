@@ -7,7 +7,7 @@ const {BadRequestError, UnsupportedMethodError} = require('../Models/Errors/Http
 const port = 8080;
 const server = net.createServer((socketConnection) => {
     socketConnection.setEncoding('ascii');
-    socketConnection.on("data", (message) => readHttpRequestMessage(server, socketConnection, message.toString("ascii")));
+    socketConnection.on("data", (message) => readHttpRequestMessage(socketConnection, message.toString("ascii")));
 });
 
 server.listen(port, () => {
