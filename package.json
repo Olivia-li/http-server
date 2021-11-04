@@ -4,9 +4,9 @@
   "description": "A JavaScript HTTP server",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node Services/HttpServerService.js",
     "preinstall": "npx only-allow yarn",
-    "test": "mocha"
+    "test": "mocha test/ControllerTests test/ServicesTests"
   },
   "repository": {
     "type": "git",
