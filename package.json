@@ -2,7 +2,7 @@
   "name": "http-server",
   "version": "1.0.0",
   "description": "A JavaScript HTTP server",
-  "main": "index.js",
+  "main": "Services/HttpServerService.js",
   "scripts": {
     "start": "node Services/HttpServerService.js",
     "preinstall": "npx only-allow yarn",
