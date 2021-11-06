@@ -17,14 +17,14 @@ This will execute a script which takes the following steps:
 
 ### Running the app with Docker
 Build the docker image:
-`docker build -t http-server .`
+`docker build -q -t http-server .`
 
 To run the program:
-`docker run http-server`
+`docker run --detach -p 8080:8080 --name http-server-container http-server`
 
 ## Tests
 Tests are located in the `test` folder located at the root of the main application. To run all tests in the test folder run:
-`yarn run test`
+`yarn test`
 
 ## Tech stack and toolchain 
 A description of our tech stack and toolchain can be found [here](https://github.com/Olivia-li/http-server/wiki/Tech-stack-and-toolchain)
