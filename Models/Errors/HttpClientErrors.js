@@ -8,6 +8,22 @@ class BadRequestError extends Error {
     }
 }
 
+class UnauthorizedRequestError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "UnauthorizedRequestError";
+        this.errorCode = 401;
+    }
+}
+
+class ForbiddenRequestError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "UnauthorizedRequestError";
+        this.errorCode = 403;
+    }
+}
+
 class UnsupportedMethodError extends Error {
     constructor(message) {
         super(message);
@@ -24,4 +40,5 @@ class UnsupportedContentTypeError extends Error {
     }
 }
 
-module.exports = {BadRequestError, UnsupportedMethodError, UnsupportedContentTypeError};
+
+module.exports = {BadRequestError, UnsupportedMethodError, UnsupportedContentTypeError, UnauthorizedRequestError, ForbiddenRequestError};

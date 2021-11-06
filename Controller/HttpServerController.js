@@ -2,7 +2,8 @@ const {parseBody} = require( "./HttpBodyParserController");
 const {HttpRequestMessage} = require( "../Models/HttpRequestMessage");
 const {HttpResponseMessage} = require( "../Models/HttpResponseMessage");
 const {URLParse, URLPath} = require( "../Services/URLParserService");
-const {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER} = require("../Constants/HttpHeaders")
+const {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER} = require("../Constants/HttpHeaders");
+const {UnauthorizedRequestError, ForbiddenRequestError} = require("../Models/Errors/HttpClientErrors");
 
 /**
  * GET
@@ -11,6 +12,12 @@ const {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER} = require(
  * @returns 
  */
 function httpGet(httpMessage) {
+    if (httpMessage.requestTarget == 'unauthorized') {
+        throw new UnauthorizedRequestError('Unauthorized request target');
+    }
+    if (httpMessage.requestTarget == 'forbidden') {
+        throw new ForbiddenRequestError('Forbidden request target');
+    }
     const body = `GET request received on path: ${httpMessage.requestTarget}`;
     const headers = {};
     headers[CONTENT_TYPE_HEADER] = "text/plain";
