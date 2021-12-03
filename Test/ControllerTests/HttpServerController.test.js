@@ -1,27 +1,28 @@
 const assert = require('assert');
 const {HttpRequestMessage} = require('../../Models/HttpRequestMessage');
 const {httpGet} = require('../../Controller/HttpServerController.js');
-const {UnauthorizedRequestError, ForbiddenRequestError} = require('../../Models/Errors/HttpClientErrors');
+const {RequestURITooLongError, ForbiddenRequestError, NotFoundError} = require('../../Models/Errors/HttpClientErrors');
+const {SocketMock} = require('../Mocks/SocketMock');
 
-let request = new HttpRequestMessage('GET', '/one/two/three', 'HTTP/1.1', {}, '');
-let response =  'HTTP/1.1 200 OK\n'+
-                'Content-Type: text/plain\n'+
-                'Content-Length: 44\n'+
-                'Connection: close\n\n'+
-                'GET request received on path: /one/two/three'
-let unauthorized = new HttpRequestMessage('GET', 'unauthorized', 'HTTP/1.1', {}, '');
-let forbidden = new HttpRequestMessage('GET', 'forbidden', 'HTTP/1.1', {}, '');
+let long = new HttpRequestMessage('GET', '1'.repeat(256), 'HTTP/1.1', {}, '');
+let forbidden = new HttpRequestMessage('GET', '..', 'HTTP/1.1', {}, '');
+let fake = new HttpRequestMessage('GET', 'path', 'HTTP/1.1', {}, '');
+let test = new HttpRequestMessage('GET', '', {}, '');
+let socket = new SocketMock();
 
 describe('HTTP controller tests', () => {
     describe('GET', () => {
-        it('should return an HTTP GET response on successful request', () => {
-            assert.strictEqual(httpGet(request), response);
+        it('should throw RequestURITooLongError on target longer than 2048 characters total or with a filename longer than file system limits', () => {
+            assert.throws(() => httpGet(long, null), RequestURITooLongError);
         });
-        it('should throw UnauthorizedRequestError on unauthorized request', () => {
-            assert.throws(() => httpGet(unauthorized), UnauthorizedRequestError);
+        it('should throw ForbiddenRequestError on parent directory target', () => {
+            assert.throws(() => httpGet(forbidden, null), ForbiddenRequestError);
         });
-        it('should throw ForbiddenRequestError on forbidden request', () => {
-            assert.throws(() => httpGet(forbidden), ForbiddenRequestError);
+        it('should throw NotFoundError on target not found', () => {
+            assert.throws(() => httpGet(fake, null), NotFoundError);
         });
+        it('should write to socket and return nothing on success', () => {
+            assert.strictEqual(httpGet(test, socket), undefined);
+        });        
     });
 });
