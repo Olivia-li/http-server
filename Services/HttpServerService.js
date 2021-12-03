@@ -2,12 +2,36 @@ const net = require("net");
 const {HttpRequestMessage} = require("../Models/HttpRequestMessage");
 const {httpGet, httpPost, httpPut, httpDelete} = require("../Controller/HttpServerController");
 const replaceAll = require('string.prototype.replaceall');
-const {BadRequestError, UnsupportedMethodError} = require('../Models/Errors/HttpClientErrors');
+const {BadRequestError, UnauthorizedRequestError, ForbiddenRequestError, NotFoundError, UnsupportedMethodError, RequestURITooLongError, UnsupportedContentTypeError} = require('../Models/Errors/HttpClientErrors');
+const {CONTENT_TYPE_HEADER, CONTENT_LENGTH_HEADER, CONNECTION_HEADER} = require("../Constants/HttpHeaders");
+const {HttpResponseMessage} = require("../Models/HttpResponseMessage");
+const {InternalServerError} = require("../Models/Errors/HttpServerErrors");
 
 const port = 8080;
+
 const server = net.createServer((socketConnection) => {
     socketConnection.setEncoding('ascii');
-    socketConnection.on("data", (message) => readHttpRequestMessage(socketConnection, message.toString("ascii")));
+    socketConnection.on('error', function (e) {
+       console.log(e);
+    });
+    socketConnection.on("data", (message) => {
+        try {
+            readHttpRequestMessage(socketConnection, message.toString("ascii"))
+        } catch (e) {
+            if (e instanceof  BadRequestError
+                || e instanceof  UnauthorizedRequestError
+                || e instanceof  ForbiddenRequestError
+                || e instanceof  NotFoundError
+                || e instanceof  UnsupportedMethodError
+                || e instanceof  RequestURITooLongError
+                || e instanceof  UnsupportedContentTypeError
+                || e instanceof  InternalServerError) {
+                socketConnection.write(createHttpErrorResponse(e).toString());
+            } else {
+                socketConnection.write(createHttpErrorResponse(new InternalServerError(e.toString())).toString());
+            }
+        }
+    });
 });
 
 server.listen(port, () => {
@@ -45,21 +69,33 @@ function readHttpRequestMessage(socketConnection, message) {
 
     switch (httpMethod) {
         case "GET":
-            socketConnection.write(httpGet(httpMessage));
+            httpGet(httpMessage, socketConnection);
             break;
-
-        case "POST":
-            return httpPost(httpMessage);
-
-        case "DELETE":
-            return httpDelete(httpMessage);
-
-        case "PUT":
-            return httpPut(httpMessage);
 
         default:
             throw new UnsupportedMethodError("HTTP Method not allowed");
     }
+}
+
+function createHttpErrorResponse(error) {
+    const responseBody = `
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>Error</title>
+            </head>
+            <body>
+                <p>${error.errorCode}: ${error.name}</p>
+            </body>
+        </html> 
+    `;
+
+    const headers = {};
+    headers[CONTENT_TYPE_HEADER] = "text/html";
+    headers[CONTENT_LENGTH_HEADER] = `${responseBody.length}`;
+    headers[CONNECTION_HEADER] = "close";
+
+    return new HttpResponseMessage('HTTP/1.1', error.errorCode, headers, responseBody);
 }
 
 module.exports = {readHttpRequestMessage};

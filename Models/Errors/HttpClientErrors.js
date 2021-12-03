@@ -24,6 +24,14 @@ class ForbiddenRequestError extends Error {
     }
 }
 
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "NotFoundError";
+        this.errorCode = 404;
+    }
+}
+
 class UnsupportedMethodError extends Error {
     constructor(message) {
         super(message);
@@ -31,6 +39,15 @@ class UnsupportedMethodError extends Error {
         this.errorCode = 405;
     }
 }
+
+class RequestURITooLongError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "RequestURITooLongError";
+        this.errorCode = 414;
+    }
+}
+
 
 class UnsupportedContentTypeError extends Error {
     constructor(message) {
@@ -41,4 +58,4 @@ class UnsupportedContentTypeError extends Error {
 }
 
 
-module.exports = {BadRequestError, UnsupportedMethodError, UnsupportedContentTypeError, UnauthorizedRequestError, ForbiddenRequestError};
+module.exports = {BadRequestError, NotFoundError, UnsupportedMethodError, UnsupportedContentTypeError, UnauthorizedRequestError, RequestURITooLongError, ForbiddenRequestError};
