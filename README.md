@@ -38,4 +38,10 @@ A description of what went well and what didn't go so well. We also talk about w
 ## Assignment 2 Write up 
 A description of what we have created for assignment 2 can be found [here](https://github.com/Olivia-li/http-server/wiki/Assignment-2-Features)
 
+## Assignment 2 Post Mortem
+A description of what went well and what didn't go so well in assignment 2. Click [here](https://github.com/Olivia-li/http-server/wiki/Assignment-2-Post-Mortem)
+
+## Assignment 3 Write up 
+A description of what we have created for assignment 3 can be found [here](https://github.com/Olivia-li/http-server/wiki/Assignment-3-Features)
+
 
