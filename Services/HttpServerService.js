@@ -10,13 +10,13 @@ const {InternalServerError} = require("../Models/Errors/HttpServerErrors");
 const port = 8080;
 
 const server = net.createServer((socketConnection) => {
-    socketConnection.setEncoding('ascii');
+    socketConnection.setEncoding('utf-8');
     socketConnection.on('error', function (e) {
        console.log(e);
     });
     socketConnection.on("data", (message) => {
         try {
-            readHttpRequestMessage(socketConnection, message.toString("ascii"))
+            readHttpRequestMessage(socketConnection, message.toString("utf-8"))
         } catch (e) {
             if (e instanceof  BadRequestError
                 || e instanceof  UnauthorizedRequestError
@@ -85,7 +85,7 @@ function createHttpErrorResponse(error) {
                 <title>Error</title>
             </head>
             <body>
-                <p>${error.errorCode}: ${error.name}</p>
+                <h1>${error.errorCode}: ${error.name}</h1>
             </body>
         </html> 
     `;
